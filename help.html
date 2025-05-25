@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - Community Event Hub</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .help-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+        }
+
+        .help-card {
+            transition: transform 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .help-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .help-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #0d6efd;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 1rem 0;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.8rem 1rem !important;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+        
+        .nav-link.active {
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+        }
+        
+        .nav-link i {
+            margin-right: 5px;
+        }
+
+        .guide-section {
+            padding: 1rem;
+            border-radius: 10px;
+            background: #f8f9fa;
+            margin-bottom: 1rem;
+        }
+
+        .guide-section h4 {
+            color: #0d6efd;
+            margin-bottom: 1rem;
+        }
+
+        .guide-section ul, .guide-section ol {
+            padding-left: 1.5rem;
+        }
+
+        .guide-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+        }
+
+        .modal-header {
+            background: #f8f9fa;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(135deg, #1a237e, #0d47a1);">
+        <div class="container">
+            <a class="navbar-brand" href="index.html#home">
+                <i class="bi bi-calendar-event"></i> Community Event Hub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#home">
+                            <i class="bi bi-house-door"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#events">
+                            <i class="bi bi-calendar3"></i> Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="help.html">
+                            <i class="bi bi-question-circle"></i> Help
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">
+                            <i class="bi bi-envelope"></i> Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Help Hero Section -->
+    <section class="help-hero text-center">
+        <div class="container">
+            <h1 class="display-4 mb-4">How Can We Help You?</h1>
+            <div class="search-box">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-lg" placeholder="Search for help topics...">
+                    <button class="btn btn-light" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Help Cards -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card help-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-calendar-check help-icon"></i>
+                            <h3>Event Registration</h3>
+                            <p>Learn how to register for events and manage your bookings</p>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#registrationGuide">View Guide</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card help-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-person-plus help-icon"></i>
+                            <h3>Account Help</h3>
+                            <p>Manage your profile, preferences, and account settings</p>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#accountGuide">View Guide</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card help-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-question-circle help-icon"></i>
+                            <h3>FAQs</h3>
+                            <p>Find answers to commonly asked questions</p>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#faqModal">View FAQs</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Guide Modal -->
+    <div class="modal fade" id="registrationGuide" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Event Registration Guide</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="guide-section mb-4">
+                        <h4><i class="bi bi-1-circle"></i> Browse Events</h4>
+                        <p>Navigate to the Events page to view all available events. You can filter events by:</p>
+                        <ul>
+                            <li>Date and time</li>
+                            <li>Event category</li>
+                            <li>Location</li>
+                            <li>Price range</li>
+                        </ul>
+                    </div>
+                    <div class="guide-section mb-4">
+                        <h4><i class="bi bi-2-circle"></i> Select an Event</h4>
+                        <p>Click on any event to view detailed information including:</p>
+                        <ul>
+                            <li>Event description</li>
+                            <li>Date and time</li>
+                            <li>Location details</li>
+                            <li>Available tickets</li>
+                            <li>Event organizer information</li>
+                        </ul>
+                    </div>
+                    <div class="guide-section">
+                        <h4><i class="bi bi-3-circle"></i> Complete Registration</h4>
+                        <p>Follow these steps to register:</p>
+                        <ol>
+                            <li>Click the "Register Now" button</li>
+                            <li>Select the number of tickets</li>
+                            <li>Fill in your contact information</li>
+                            <li>Choose payment method</li>
+                            <li>Confirm your registration</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Guide Modal -->
+    <div class="modal fade" id="accountGuide" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Account Management Guide</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="guide-section mb-4">
+                        <h4><i class="bi bi-person"></i> Profile Management</h4>
+                        <p>Update your profile information:</p>
+                        <ul>
+                            <li>Personal details</li>
+                            <li>Contact information</li>
+                            <li>Profile picture</li>
+                            <li>Notification preferences</li>
+                        </ul>
+                    </div>
+                    <div class="guide-section mb-4">
+                        <h4><i class="bi bi-gear"></i> Account Settings</h4>
+                        <p>Manage your account settings:</p>
+                        <ul>
+                            <li>Password changes</li>
+                            <li>Email preferences</li>
+                            <li>Privacy settings</li>
+                            <li>Connected accounts</li>
+                        </ul>
+                    </div>
+                    <div class="guide-section">
+                        <h4><i class="bi bi-calendar-check"></i> Event Management</h4>
+                        <p>View and manage your events:</p>
+                        <ul>
+                            <li>Upcoming events</li>
+                            <li>Past events</li>
+                            <li>Event reminders</li>
+                            <li>Registration history</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Modal -->
+    <div class="modal fade" id="faqModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Frequently Asked Questions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How do I register for an event?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    To register for an event, browse the Events page, select your desired event, and click "Register Now". Follow the registration steps and complete the payment process.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Can I cancel my registration?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, you can cancel your registration up to 24 hours before the event. Go to your profile, find the event, and click the cancel button. Refunds will be processed within 5-7 business days.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    How do I update my profile?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Click on your profile icon in the top right corner, select "Edit Profile", and update your information. Don't forget to save your changes.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    What payment methods are accepted?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers. All payments are secure and encrypted.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQs Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <i class="bi bi-plus-circle me-2"></i>
+                            How do I register for an event?
+                        </div>
+                        <div class="faq-answer">
+                            To register for an event, simply click on the event you're interested in, fill out the registration form, and submit. You'll receive a confirmation email with all the details.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <i class="bi bi-plus-circle me-2"></i>
+                            Can I cancel my registration?
+                        </div>
+                        <div class="faq-answer">
+                            Yes, you can cancel your registration up to 24 hours before the event. Go to your profile, find the event, and click the cancel button.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <i class="bi bi-plus-circle me-2"></i>
+                            How do I get a refund?
+                        </div>
+                        <div class="faq-answer">
+                            Refunds are processed within 5-7 business days. Contact our support team with your registration details to initiate the refund process.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Support -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-card">
+                        <h2 class="text-center mb-4">Need More Help?</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Contact Support</h4>
+                                <ul class="feature-list">
+                                    <li><i class="bi bi-envelope me-2"></i> support@communityportal.com</li>
+                                    <li><i class="bi bi-telephone me-2"></i> +91 98765 43210</li>
+                                    <li><i class="bi bi-clock me-2"></i> Mon-Fri, 9AM-5PM</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Quick Links</h4>
+                                <ul class="feature-list">
+                                    <li><a href="#" class="text-decoration-none">Privacy Policy</a></li>
+                                    <li><a href="#" class="text-decoration-none">Terms of Service</a></li>
+                                    <li><a href="#" class="text-decoration-none">Community Guidelines</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3">
+        <div class="container">
+            <p>&copy; 2024 Community Event Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                icon.classList.remove('bi-dash-circle');
+                icon.classList.add('bi-plus-circle');
+            } else {
+                answer.style.display = 'block';
+                icon.classList.remove('bi-plus-circle');
+                icon.classList.add('bi-dash-circle');
+            }
+        }
+    </script>
+</body>
+</html>

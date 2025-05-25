@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Community Event Portal</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(135deg, #1a237e, #0d47a1);">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="bi bi-calendar-event"></i> Community Event Hub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">
+                            <i class="bi bi-house-door"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#events">
+                            <i class="bi bi-calendar3"></i> Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="help.html">
+                            <i class="bi bi-question-circle"></i> Help
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">
+                            <i class="bi bi-envelope"></i> Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <style>
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.8rem 1rem !important;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+        
+        .nav-link.active {
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+        }
+        
+        .nav-link i {
+            margin-right: 5px;
+        }
+    </style>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Welcome Banner Section -->
+        <section id="home" class="hero-section">
+            <div class="container">
+                <div id="welcomeBanner" class="welcome-banner text-center py-5">
+                    <div class="app-name-container mb-5">
+                        <h1 class="display-3 text-white fw-bold">Community Event Hub</h1>
+                        <p class="lead text-white fs-4">Your Local Event Discovery Platform</p>
+                    </div>
+                    <div class="content-container">
+                        <p class="lead text-white mb-4 fs-4">Discover amazing local events and connect with your neighbors</p>
+                        <span class="special-offer">Special: 20% off all workshop registrations this month!</span>
+                        <div class="mt-4">
+                            <button id="findNearbyBtn" class="btn btn-light btn-lg me-3">
+                                <i class="bi bi-geo-alt"></i> Find Nearby Events
+                            </button>
+                            <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#videoModal">
+                                <i class="bi bi-play-circle"></i> Watch Promo
+                            </button>
+                        </div>
+                        <div class="mt-5">
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <div class="text-white">
+                                        <div class="feature-icon">
+                                            <i class="bi bi-calendar-check"></i>
+                                        </div>
+                                        <h3 class="h5">Easy Registration</h3>
+                                        <p class="small">Quick and simple event registration process</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-white">
+                                        <div class="feature-icon">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <h3 class="h5">Community Focus</h3>
+                                        <p class="small">Connect with local community members</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-white">
+                                        <div class="feature-icon">
+                                            <i class="bi bi-star"></i>
+                                        </div>
+                                        <h3 class="h5">Quality Events</h3>
+                                        <p class="small">Curated events for all interests</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5 highlight">Upcoming Community Events</h2>
+                
+                <!-- Event Filter -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <select id="eventFilter" class="form-select" onchange="filterEvents()">
+                            <option value="">All Categories</option>
+                            <option value="workshop">Workshops</option>
+                            <option value="music">Music</option>
+                            <option value="sports">Sports</option>
+                            <option value="community">Community</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="searchEvents" class="form-control" placeholder="Search events..." onkeydown="handleSearch(event)">
+                    </div>
+                </div>
+
+                <!-- Event Cards Container -->
+                <div id="eventsContainer" class="row">
+                    <!-- Events will be dynamically loaded here -->
+                </div>
+
+                <!-- Image Gallery -->
+                <div class="mt-5 gallery-section">
+                    <h3 class="text-center mb-4">Past Event Gallery</h3>
+                    <div class="row justify-content-center">
+                        <div class="col-md-3 gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&auto=format&fit=crop&q=80" alt="Summer Festival" title="Summer Festival 2023" class="gallery-img" ondblclick="enlargeImage(this)">
+                            <p class="mt-2">Summer Festival</p>
+                        </div>
+                        <div class="col-md-3 gallery-item">
+                            <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&auto=format&fit=crop&q=80" alt="Sports Tournament" title="Community Sports Tournament" class="gallery-img" ondblclick="enlargeImage(this)">
+                            <p class="mt-2">Sports Tournament</p>
+                        </div>
+                        <div class="col-md-3 gallery-item">
+                            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400&auto=format&fit=crop&q=80" alt="Music Concert" title="Local Band Concert" class="gallery-img" ondblclick="enlargeImage(this)">
+                            <p class="mt-2">Music Concert</p>
+                        </div>
+                        <div class="col-md-3 gallery-item">
+                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&auto=format&fit=crop&q=80" alt="Food Fair" title="Community Food Fair" class="gallery-img" ondblclick="enlargeImage(this)">
+                            <p class="mt-2">Food Fair</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Form Section -->
+        <section id="registration" class="py-5 bg-light">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-center mb-4">Event Registration</h2>
+                        <form id="registrationForm" class="needs-validation" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="userName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="userName" placeholder="Enter your full name" required autofocus>
+                                    <div class="invalid-feedback">Please provide a valid name.</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="userEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="userEmail" placeholder="your.email@example.com" required>
+                                    <div class="invalid-feedback">Please provide a valid email.</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="userPhone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="userPhone" placeholder="+91 98765 43210" onblur="validatePhone()">
+                                    <div id="phoneError" class="text-danger"></div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="eventDate" class="form-label">Preferred Date</label>
+                                    <input type="date" class="form-control" id="eventDate" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="eventType" class="form-label">Event Type</label>
+                                <select class="form-select" id="eventType" onchange="showEventFee()" required>
+                                    <option value="">Choose an event type</option>
+                                    <option value="workshop" data-fee="2500">Workshop (₹2,500)</option>
+                                    <option value="music" data-fee="1500">Music Event (₹1,500)</option>
+                                    <option value="sports" data-fee="1000">Sports Activity (₹1,000)</option>
+                                    <option value="community" data-fee="0">Community Meeting (Free)</option>
+                                </select>
+                                <div id="eventFee" class="mt-2 text-info"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userMessage" class="form-label">Additional Message</label>
+                                <textarea class="form-control" id="userMessage" rows="4" placeholder="Any special requirements or questions?" onkeyup="countCharacters()"></textarea>
+                                <div id="charCount" class="form-text">0 characters</div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg" onclick="showConfirmation(event)">
+                                    <i class="bi bi-check-circle"></i> Register Now
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-lg ms-2" onclick="clearPreferences()">
+                                    Clear Preferences
+                                </button>
+                            </div>
+                            <output id="confirmationMessage" class="d-block mt-3 text-center"></output>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="feedback" class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-center mb-4">Event Feedback</h2>
+                        <form id="feedbackForm">
+                            <div class="mb-3">
+                                <label for="feedbackEvent" class="form-label">Select Event</label>
+                                <select class="form-select" id="feedbackEvent" onchange="updateFeedbackInfo()">
+                                    <option value="">Choose an event</option>
+                                    <option value="summer-festival">Summer Festival</option>
+                                    <option value="art-workshop">Art Workshop</option>
+                                    <option value="music-concert">Music Concert</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">Rating</label>
+                                <div class="rating-stars">
+                                    <span class="star" data-rating="1">★</span>
+                                    <span class="star" data-rating="2">★</span>
+                                    <span class="star" data-rating="3">★</span>
+                                    <span class="star" data-rating="4">★</span>
+                                    <span class="star" data-rating="5">★</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="feedbackText" class="form-label">Your Feedback</label>
+                                <textarea class="form-control" id="feedbackText" rows="4" placeholder="Share your experience..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">Submit Feedback</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5 bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="mb-4">Contact Information</h2>
+                        <div class="contact-info">
+                            <p><i class="bi bi-geo-alt"></i> 123 Main Street, Your City, State 12345</p>
+                            <p><i class="bi bi-telephone"></i> +91 98765 43210</p>
+                            <p><i class="bi bi-envelope"></i> info@communityportal.com</p>
+                        </div>
+                        <div class="social-links mt-4">
+                            <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="mb-4">Community Bulletin</h2>
+                        <div class="news-columns">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3 position-relative">
+        <div class="container">
+            <p>&copy; 2024 Local Community Event Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Community Event Promo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <video id="promoVideo" class="w-100" controls oncanplay="videoReady()">
+                        <source src="/placeholder.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div id="videoStatus" class="mt-2 text-info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Enlargement Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img id="enlargedImage" class="img-fluid" src="/placeholder.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="main.js"></script>
+    <script>
+        window.onbeforeunload = function() {
+            if (document.getElementById('registrationForm').checkValidity()) {
+                return "You have unsaved changes. Are you sure you want to leave?";
+            }
+        };
+    </script>
+</body>
+</html>
